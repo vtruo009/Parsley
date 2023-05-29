@@ -1,0 +1,15 @@
+# OSX
+.DS_TORE
+
+# node.js
+node_modules/
+
+# build
+src/*.js
+/dist
+
+# environment variables
+environment.txt
+
+# logs
+*.log

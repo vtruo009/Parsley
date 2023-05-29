@@ -1,0 +1,20 @@
+{
+  "name": "notion-finance-tracker",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "author": "Van Truong",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "tsc src/index.ts && node src/index.js",
+    "test": "echo no test at the moment"
+  },
+  "devDependencies": {
+    "@types/node": "20.2.5",
+    "prettier": "2.8.8",
+    "ts-node": "10.9.1",
+    "typescript": "5.0.4"
+  },
+  "dependencies": {
+    "@notionhq/client": "2.2.5"
+  }
+}
