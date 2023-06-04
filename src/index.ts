@@ -1,18 +1,21 @@
-const { Client } = require('@notionhq/client'); // import doesn't work
+// import { Client } from '@notionhq/client'
+// Using import causes ES5 error for private properties
+const { Client } = require('@notionhq/client');
 import {
     NOTION_SECRET,
     NOTION_DATABASE_ID
-} from './config/integration';
+} from './config/environment';
+import { parseCSV } from './csv-parser';
 
 async function main() {
     const notion = new Client({
         auth: NOTION_SECRET,
     });
     
-    // const response = await notion.databases.query({
+    // const exDatabase = await notion.databases.query({
     //     database_id: NOTION_DATABASE_ID,
     // });
-    const response = await notion.pages.create({
+    const exPage = await notion.pages.create({
         parent: {
             type: 'database_id',
             database_id: NOTION_DATABASE_ID,
@@ -43,7 +46,7 @@ async function main() {
         }
     });
 
-    return response;
+    return exPage;
 }
 
 main()
