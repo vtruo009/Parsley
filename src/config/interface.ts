@@ -3,15 +3,15 @@
  */
 export enum Category {
     BILLS = 'Bills & Utilities',
-    GROCERIES = 'GROCERIES',
+    GROCERIES = 'Groceries',
 }
 
 /**
  * Defines the properties to be specified in instances of {@link transactionItem}.
  */
 export interface transactionItem {
-    TransactionDate: Date;
-    PostDate: Date;
+    'Transaction Date': Date;
+    'Post Date': Date;
     Description: string;
     Category: Category;
     Type?: string;

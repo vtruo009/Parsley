@@ -1,11 +1,9 @@
-// import { Client } from '@notionhq/client'
 // Using import causes ES5 error for private properties
 const { Client } = require('@notionhq/client');
 import {
     NOTION_SECRET,
     NOTION_DATABASE_ID
 } from './config/environment';
-import { parseCSV } from './csv-parser';
 
 async function main() {
     const notion = new Client({

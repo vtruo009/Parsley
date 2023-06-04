@@ -10,6 +10,7 @@
     "test": "echo no test at the moment"
   },
   "devDependencies": {
+    "@types/lodash": "4.14.195",
     "@types/node": "20.2.5",
     "csv-parse": "5.4.0",
     "prettier": "2.8.8",
