@@ -5,11 +5,15 @@
 node_modules/
 
 # build
-src/*.js
+**/*.js
 /dist
 
-# environment variables
+# setups
 environment.txt
+.vscode/*
 
 # logs
 *.log
+
+# bank statements
+bank-statements/
