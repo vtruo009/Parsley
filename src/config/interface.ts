@@ -1,20 +1,22 @@
 /**
- * All possible transaction categories
+ * Defines the properties to be specified in instances of {@link TransactionItem}
  */
-export enum Category {
-    BILLS = 'Bills & Utilities',
-    GROCERIES = 'Groceries',
+export interface TransactionItem {
+    transactionDate: string;
+    postedDate: string;
+    description: string;
+    amount: number;
+    category: TransactionCategory;
+    type: 'sale';
+    memo: string;
 }
 
 /**
- * Defines the properties to be specified in instances of {@link transactionItem}.
+ * The category the transaction belongs to
  */
-export interface transactionItem {
-    'Transaction Date': Date;
-    'Post Date': Date;
-    Description: string;
-    Category: Category;
-    Type?: string;
-    Amount: number;
-    Memo?: string;
+export enum TransactionCategory {
+    BILLS = 'Bills & utilities',
+    GROCERY = 'Grocery',
+    SHOPPING = 'Shopping',
+    FOOD_AND_DRINKS = 'Food & drinks',
 }
