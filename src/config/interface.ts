@@ -13,7 +13,7 @@ export enum Category {
  */
 export interface transactionItem {
     transactionDate: string;
-    postedDate: string;
+    postDate: string;
     description: string;
     amount: number;
     category: Category;
