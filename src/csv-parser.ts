@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import { transactionItem } from './config/interface';
 
 export function createTransactionData() {
-    const parsedData = parseCSV('/Users/vantruong/Desktop/notion-financial-tracker/bank-statements/chase_2023-06-01.CSV');
+    const parsedData = parseCSV('/workspaces/Notion-Financial-Tracker/bank-statements/chase_2023-06-01.csv');
     return cleanUpData(parsedData);
 }
 
@@ -11,13 +11,12 @@ function cleanUpData(parsedData: any): transactionItem[] {
     const transactions: transactionItem[] = [];
     for (let record of parsedData) {
         transactions.push({
-            'Transaction Date': new Date(record['Transaction Date']),
-            'Post Date': new Date(record['Post Date']),
-            Description: record.Description,
-            Category: record.Category,
-            Type: record.Type,
-            Amount: record.Amount,
-            Memo: record.Memo,
+            transactionDate: new Date(record['Transaction Date']).toISOString(),
+            postDate: new Date(record['Post Date']).toISOString(),
+            description: record.Description,
+            category: record.Category,
+            amount: record.Amount,
+            memo: record.Memo,
         });
     }
     return transactions;

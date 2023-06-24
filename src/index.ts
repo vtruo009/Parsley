@@ -4,47 +4,51 @@ import {
     NOTION_SECRET,
     NOTION_DATABASE_ID
 } from './config/environment';
+import { createTransactionData } from './csv-parser';
 
 async function main() {
-    const notion = new Client({
-        auth: NOTION_SECRET,
-    });
-    
+    // const notion = new Client({
+    //     auth: NOTION_SECRET,
+    // });
+
     // const exDatabase = await notion.databases.query({
     //     database_id: NOTION_DATABASE_ID,
     // });
-    const exPage = await notion.pages.create({
-        parent: {
-            type: 'database_id',
-            database_id: NOTION_DATABASE_ID,
-        },
-        properties: {
-            'Item': {
-                type: 'title',
-                title: [{
-                    type: 'text',
-                    text: {
-                        content: 'Ground Beef'
-                    }
-                }],
-            },
-            'Category': {
-                type: 'multi_select',
-                multi_select: [
-                    {
-                        name: 'Protein',
-                        color: 'blue',
-                    }
-                ]
-            },
-            'Price': {
-                type: 'number',
-                number: 9.99
-            }
-        }
-    });
+    // const exPage = await notion.pages.create({
+    //     parent: {
+    //         type: 'database_id',
+    //         database_id: NOTION_DATABASE_ID,
+    //     },
+    //     properties: {
+    //         'Item': {
+    //             type: 'title',
+    //             title: [{
+    //                 type: 'text',
+    //                 text: {
+    //                     content: 'Ground Beef'
+    //                 }
+    //             }],
+    //         },
+    //         'Category': {
+    //             type: 'multi_select',
+    //             multi_select: [
+    //                 {
+    //                     name: 'Protein',
+    //                     color: 'blue',
+    //                 }
+    //             ]
+    //         },
+    //         'Price': {
+    //             type: 'number',
+    //             number: 9.99
+    //         }
+    //     }
+    // });
 
-    return exPage;
+    // return exPage;
+    const transactions = createTransactionData();
+
+    return 1;
 }
 
 main()

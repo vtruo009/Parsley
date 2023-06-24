@@ -16,4 +16,4 @@ environment.txt
 *.log
 
 # bank statements
-bank-statements/
+bank-statements/**
