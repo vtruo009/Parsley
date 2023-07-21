@@ -1,14 +1,14 @@
 import { parse } from 'csv-parse/sync';
 import * as fs from 'fs';
-import { transactionItem } from './config/interface';
+import { TransactionItem } from './interface';
 
 export function createTransactionData() {
     const parsedData = parseCSV('/workspaces/Notion-Financial-Tracker/bank-statements/chase_2023-06-01.csv');
     return cleanUpData(parsedData);
 }
 
-function cleanUpData(parsedData: any): transactionItem[] {
-    const transactions: transactionItem[] = [];
+function cleanUpData(parsedData: any): TransactionItem[] {
+    const transactions: TransactionItem[] = [];
     for (let record of parsedData) {
         transactions.push({
             transactionDate: new Date(record['Transaction Date']).toISOString(),
