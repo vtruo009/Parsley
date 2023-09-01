@@ -67,7 +67,7 @@ interface Annotation {
     color: TextColor;
 }
 
-enum RichTextType {
+export enum RichTextType {
     TEXT = 'text',
     MENTION = 'mention',
     EQUATION = 'equation',
@@ -115,13 +115,6 @@ interface Select {
 }
 
 /**
- * Properties to be specified in instnaces of {@link Number}
- */
-interface Number {
-    number: number;
-}
-
-/**
  * Properties to be specified in instances of {@link Date}
  * @property {string} start The start date
  * @property {string} end Optional end date
@@ -131,7 +124,23 @@ interface Date {
     end?: string;
 }
 
-type Properties = Select | Number | Date | RichText;
+type PropertiesType = Select | number | Date | RichText | Text;
+
+export enum PropertyType {
+    TITLE = 'title',
+    DATE = 'date',
+    SELECT = 'select',
+    RICH_TEXT = 'rich_text',
+    NUMBER = 'number',
+}
+
+type MappedProperty = {
+    [key in PropertyType]?: PropertiesType
+}
+
+interface Properties extends MappedProperty {
+    type: PropertyType,
+}
 
 /**
  * Properties to be specified in instances of {@link Page}
@@ -140,8 +149,16 @@ type Properties = Select | Number | Date | RichText;
  * @property {Object} properties An object containing all the properties of page
  */
 export interface Page {
-    parent: string;
+    parent: {
+        type: 'database_id',
+        database_id: string,
+    } | {
+        type: 'page_id',
+        page_id: string,
+    };
     properties: {
         [key: string]: Properties
-    }
+    };
+    id?: string;
+
 }

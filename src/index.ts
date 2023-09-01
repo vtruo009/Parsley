@@ -5,7 +5,7 @@ import {
     NOTION_DATABASE_ID
 } from './config/environment';
 import { createTransactionData } from './csv-parser';
-import { getPage } from './notion-api/page';
+import { createPage, getPage } from './notion-api/page';
 
 async function main() {
     // const notion = new Client({
@@ -49,7 +49,8 @@ async function main() {
     // return exPage;
     // const transactions = createTransactionData();
     const test = await getPage('d5cd6d9bc9594d40b2376e600e6e4110')
-    console.log(test)
+    const create = await createPage();
+    console.log(create)
     return 1;
 }
 
