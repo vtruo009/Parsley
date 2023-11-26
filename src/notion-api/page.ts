@@ -1,6 +1,7 @@
 import { Client } from "@notionhq/client";
 import { NOTION_DATABASE_ID, NOTION_SECRET } from "../config/environment";
-import { Category, Color, Page, ParentType, PropertyType, RichTextType, TransactionItem } from "../interface";
+import { TransactionItem } from "../mixins";
+import { PropertyType, RichTextType, Category, Color } from "../enums";
 
 const notion = new Client({ auth: NOTION_SECRET });
 
@@ -9,51 +10,60 @@ export async function getPage(pageId: string) {
 }
 
 export async function createPage(transaction: TransactionItem) {
-    const requestBody = generateRequestBody(transaction);
-    return await notion.pages.create(requestBody);
-}
-
-function generateRequestBody(item: TransactionItem) {
-    const body: Page = {
+    return await notion.pages.create({
         parent: {
             type: 'database_id',
             database_id: NOTION_DATABASE_ID || '',
         },
         properties: {
             Description: {
-                type: PropertyType.TITLE,
-                title: [{
-
-                }]
+                [PropertyType.TITLE]: [
+                    {
+                        type: RichTextType.TEXT,
+                        [RichTextType.TEXT]: {
+                            content: transaction.description
+                        },
+                        annotations: {
+                            bold: false,
+                            italic: false,
+                            strikethrough: false,
+                            underline: false,
+                            code: false
+                        },
+                    }
+                ]
             },
             Amount: {
-                type: PropertyType.NUMBER,
-                number: item.amount,
+                [PropertyType.NUMBER]: transaction.amount,
             },
             Date: {
-                type: PropertyType.DATE,
-                date: {
-                    start: item.transactionDate
+                [PropertyType.DATE]: {
+                    start: transaction.transactionDate
                 }
             },
             Category: {
-                type: PropertyType.SELECT,
-                select: {
+                [PropertyType.SELECT]: {
                     name: Category.GROCERIES,
                     color: Color.GREEN,
                 }
             },
             Memo: {
-                type: PropertyType.RICH_TEXT,
-                rich_text: [{
-                    type: RichTextType.TEXT,
-                    text: {
-                        content: item.memo,
-                        link: null
+                [PropertyType.RICH_TEXT]: [
+                    {
+                        type: RichTextType.TEXT,
+                        text: {
+                            content: transaction.memo,
+                        },
+                        annotations: {
+                            bold: false,
+                            italic: false,
+                            strikethrough: false,
+                            underline: false,
+                            code: false
+                        },
                     }
-                }]
+                ]
             }
         }
-    }
-    return body;
+    });
 }
