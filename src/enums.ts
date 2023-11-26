@@ -15,7 +15,7 @@ export enum Color {
     BLUE = 'blue',
     BROWN = 'brown',
     DEFAULT = 'default',
-    GRAYP = 'gray',
+    GRAY = 'gray',
     GREEN = 'green',
     ORANGE = 'orange',
     PINK = 'pink',

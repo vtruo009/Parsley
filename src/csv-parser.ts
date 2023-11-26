@@ -4,7 +4,7 @@ import { TransactionItem } from './mixins';
 import { Category } from './enums';
 
 export function createTransactionData() {
-    const parsedData = parseCSV('bank-statements/chase-2023-11-24.CSV');
+    const parsedData = parseCSV('bank-statements/chase-2023-11-26.CSV');
     return cleanUpData(parsedData);
 }
 

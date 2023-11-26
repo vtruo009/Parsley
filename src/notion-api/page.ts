@@ -5,12 +5,21 @@ import { PropertyType, RichTextType, Category, Color } from "../enums";
 
 const notion = new Client({ auth: NOTION_SECRET });
 
+const CATEGORY_COLOR_MAP: {
+    [key in Category]: Color
+} = {
+    [Category.BILLS]: Color.BLUE,
+    [Category.GROCERIES]: Color.GREEN,
+    [Category.SHOPPING]: Color.PINK,
+    [Category.FOOD_AND_DRINKS]: Color.BROWN,
+}
+
 export async function getPage(pageId: string) {
     return await notion.pages.retrieve({ page_id: pageId });
 }
 
-export async function createPage(transaction: TransactionItem) {
-    return await notion.pages.create({
+export function createPage(transaction: TransactionItem) {
+    notion.pages.create({
         parent: {
             type: 'database_id',
             database_id: NOTION_DATABASE_ID || '',
@@ -43,8 +52,8 @@ export async function createPage(transaction: TransactionItem) {
             },
             Category: {
                 [PropertyType.SELECT]: {
-                    name: Category.GROCERIES,
-                    color: Color.GREEN,
+                    name: transaction.category,
+                    color: CATEGORY_COLOR_MAP[transaction.category],
                 }
             },
             Memo: {
@@ -65,5 +74,10 @@ export async function createPage(transaction: TransactionItem) {
                 ]
             }
         }
+    }).then(resp => {
+        console.log(`Created item ${transaction.description} w/ id: ${resp.id}`);
+    }).catch(error => {
+        console.log(error);
+        throw new Error(`Error creating a page for ${transaction.description}`);
     });
 }
