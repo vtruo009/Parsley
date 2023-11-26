@@ -11,14 +11,16 @@ export function createTransactionData() {
 function cleanUpData(parsedData: any): TransactionItem[] {
     const transactions: TransactionItem[] = [];
     for (let record of parsedData) {
-        transactions.push({
-            transactionDate: new Date(record['Transaction Date']).toISOString(),
-            postDate: new Date(record['Post Date']).toISOString(),
-            description: record.Description as string,
-            category: record.Category as Category,
-            amount: Math.abs(record.Amount as number),
-            memo: record.Memo as string,
-        });
+        if (record.Type !== 'Payment') {
+            transactions.push({
+                transactionDate: new Date(record['Transaction Date']).toISOString(),
+                postDate: new Date(record['Post Date']).toISOString(),
+                description: record.Description as string,
+                category: record.Category as Category,
+                amount: Math.abs(record.Amount as number),
+                memo: record.Memo as string,
+            });
+        }
     }
     return transactions;
 }
