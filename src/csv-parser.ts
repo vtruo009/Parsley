@@ -1,29 +1,32 @@
 import { parse } from 'csv-parse/sync';
 import * as fs from 'fs';
-import { TransactionItem } from './interface';
+import { TransactionItem } from './mixins';
+import { Category } from './enums';
 
-export function createTransactionData() {
-    const parsedData = parseCSV('/workspaces/Notion-Financial-Tracker/bank-statements/chase_2023-06-01.csv');
-    return cleanUpData(parsedData);
+export function createTransactions() {
+    const parsedData = parseCSV('bank-statements/chase-2023-11-26.CSV');
+    return createTransaction(parsedData);
 }
 
-function cleanUpData(parsedData: any): TransactionItem[] {
+function createTransaction(parsedData: any): TransactionItem[] {
     const transactions: TransactionItem[] = [];
     for (let record of parsedData) {
-        transactions.push({
-            transactionDate: new Date(record['Transaction Date']).toISOString(),
-            postDate: new Date(record['Post Date']).toISOString(),
-            description: record.Description,
-            category: record.Category,
-            amount: record.Amount,
-            memo: record.Memo,
-        });
+        if (record.Type !== 'Payment') {
+            transactions.push({
+                transactionDate: new Date(record['Transaction Date']).toISOString(),
+                postDate: new Date(record['Post Date']).toISOString(),
+                description: record.Description as string,
+                category: record.Category as Category,
+                amount: Math.abs(record.Amount as number),
+                memo: record.Memo as string,
+            });
+        }
     }
     return transactions;
 }
 
 function parseCSV(filePath: string) {
-    const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8'});
+    const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8' });
     return parse(
         fileContent,
         {

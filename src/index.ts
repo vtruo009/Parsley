@@ -1,62 +1,29 @@
 // Using import causes ES5 error for private properties
-const { Client } = require('@notionhq/client');
-import {
-    NOTION_SECRET,
-    NOTION_DATABASE_ID
-} from './config/environment';
-import { createTransactionData } from './csv-parser';
+import { createTransactions } from './csv-parser';
+import { createPage, getPage } from './notion-api/page';
+import { Client } from "@notionhq/client";
+import { NOTION_SECRET } from "./config/environment";
+import { getDatabase } from './notion-api/database';
 
-async function main() {
-    // const notion = new Client({
-    //     auth: NOTION_SECRET,
-    // });
+export const notion = new Client({ auth: NOTION_SECRET });
 
-    // const exDatabase = await notion.databases.query({
-    //     database_id: NOTION_DATABASE_ID,
-    // });
-    // const exPage = await notion.pages.create({
-    //     parent: {
-    //         type: 'database_id',
-    //         database_id: NOTION_DATABASE_ID,
-    //     },
-    //     properties: {
-    //         'Item': {
-    //             type: 'title',
-    //             title: [{
-    //                 type: 'text',
-    //                 text: {
-    //                     content: 'Ground Beef'
-    //                 }
-    //             }],
-    //         },
-    //         'Category': {
-    //             type: 'multi_select',
-    //             multi_select: [
-    //                 {
-    //                     name: 'Protein',
-    //                     color: 'blue',
-    //                 }
-    //             ]
-    //         },
-    //         'Price': {
-    //             type: 'number',
-    //             number: 9.99
-    //         }
-    //     }
-    // });
-
-    // return exPage;
-    const transactions = createTransactionData();
-
-    return 1;
+function main() {
+    // const transactions = createTransactionData();
+    // for (let transaction of transactions) {
+    //     createPage(transaction);
+    // }
+    // getDatabase().then(res => {
+    //     console.log(res)
+    // }).catch(err => {
+    //     console.log(err)
+    // })
+    getPage('e4c40637eb724649a28b9881b15199ca')
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
-main()
-    .then(resp => {
-        console.log(resp);
-        process.exit(0);
-    })
-    .catch(err => {
-        console.error(err);
-        process.exit(1);
-    })
+main();
