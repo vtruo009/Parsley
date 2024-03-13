@@ -17,3 +17,6 @@ environment.txt
 
 # bank statements
 bank-statements/**
+
+# Environment variables
+**/*.env

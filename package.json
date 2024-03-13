@@ -6,8 +6,9 @@
   "license": "UNLICENSED",
   "type": "commonjs",
   "scripts": {
-    "build": "tsc src/index.ts && node src/index.js",
-    "test": "echo no test at the moment"
+    "build": "tsc && nodemon src/index.js",
+    "test": "echo no test at the moment",
+    "clean": "rm */**/*.js"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.11",
