@@ -3,12 +3,12 @@ import * as fs from 'fs';
 import { TransactionItem } from './mixins';
 import { Category } from './enums';
 
-export function createTransactionData() {
+export function createTransactions() {
     const parsedData = parseCSV('bank-statements/chase-2023-11-26.CSV');
-    return cleanUpData(parsedData);
+    return createTransaction(parsedData);
 }
 
-function cleanUpData(parsedData: any): TransactionItem[] {
+function createTransaction(parsedData: any): TransactionItem[] {
     const transactions: TransactionItem[] = [];
     for (let record of parsedData) {
         if (record.Type !== 'Payment') {

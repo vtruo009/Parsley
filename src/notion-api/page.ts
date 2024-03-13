@@ -1,9 +1,7 @@
-import { Client } from "@notionhq/client";
-import { NOTION_DATABASE_ID, NOTION_SECRET } from "../config/environment";
 import { TransactionItem } from "../mixins";
 import { PropertyType, RichTextType, Category, Color } from "../enums";
-
-const notion = new Client({ auth: NOTION_SECRET });
+import { notion } from "..";
+import { NOTION_DATABASE_ID } from "../config/environment";
 
 const CATEGORY_COLOR_MAP: {
     [key in Category]: Color
