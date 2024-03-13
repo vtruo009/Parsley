@@ -1,22 +1,11 @@
 /**
- * Supported categories of a transaction
- */
-export enum Category {
-    BILLS = 'Bills & Utilities',
-    GROCERIES = 'Groceries',
-    SHOPPING = 'Shopping',
-    FOOD_AND_DRINKS = 'Food & Drinks',
-}
-
-/**
-<<<<<<< HEAD:src/enums.ts
  * Available color that can be used with multiselect, text, and select
  */
 export enum Color {
     BLUE = 'blue',
     BROWN = 'brown',
     DEFAULT = 'default',
-    GRAY = 'gray',
+    GRAYP = 'gray',
     GREEN = 'green',
     ORANGE = 'orange',
     PINK = 'pink',
@@ -40,22 +29,10 @@ export enum BackgroundColor {
     YELLOW = 'yellow_background',
 }
 
-/**
- * Supported types of RichText
- */
-export enum RichTextType {
-    TEXT = 'text',
-    MENTION = 'mention',
-    EQUATION = 'equation',
-}
+export type TextColor = Color | BackgroundColor;
 
-/**
- * Supported property types
- */
-export enum PropertyType {
-    TITLE = 'title',
-    DATE = 'date',
-    SELECT = 'select',
-    RICH_TEXT = 'rich_text',
-    NUMBER = 'number',
+export interface Select {
+    name: string;
+    color: Color;
+    id?: string;
 }
