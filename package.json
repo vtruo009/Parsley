@@ -1,14 +1,14 @@
 {
   "name": "notion-finance-tracker",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "index.js",
   "author": "Van Truong",
   "license": "UNLICENSED",
   "type": "commonjs",
   "scripts": {
-    "build": "tsc && nodemon src/index.js",
+    "build": "tsc && nodemon dist/src/index.js",
     "test": "echo no test at the moment",
-    "clean": "rm */**/*.js"
+    "clean": "rm **/*.js"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.11",

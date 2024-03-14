@@ -3,15 +3,6 @@ import { PropertyType, RichTextType, Category, Color } from "../enums";
 import { notion } from "..";
 import { NOTION_DATABASE_ID } from "../config/environment";
 
-const CATEGORY_COLOR_MAP: {
-    [key in Category]: Color
-} = {
-    [Category.BILLS]: Color.BLUE,
-    [Category.GROCERIES]: Color.GREEN,
-    [Category.SHOPPING]: Color.PINK,
-    [Category.FOOD_AND_DRINKS]: Color.BROWN,
-}
-
 export async function getPage(pageId: string) {
     return await notion.pages.retrieve({ page_id: pageId });
 }
@@ -20,7 +11,7 @@ export function createPage(transaction: TransactionItem) {
     notion.pages.create({
         parent: {
             type: 'database_id',
-            database_id: NOTION_DATABASE_ID || '',
+            database_id: process.env.NOTION_DATABASE_ID || '',
         },
         properties: {
             Description: {
@@ -51,7 +42,6 @@ export function createPage(transaction: TransactionItem) {
             Category: {
                 [PropertyType.SELECT]: {
                     name: transaction.category,
-                    color: CATEGORY_COLOR_MAP[transaction.category],
                 }
             },
             Memo: {
