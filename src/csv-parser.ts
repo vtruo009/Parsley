@@ -4,8 +4,20 @@ import { TransactionItem } from './mixins';
 import { Category } from './enums';
 
 export function createTransactions() {
-    const parsedData = parseCSV('bank-statements/chase-2023-11-26.CSV');
+    const parsedData = parseCSV('bank-statements/chase-2023-11-24.CSV');
     return createTransaction(parsedData);
+}
+
+function parseCSV(filePath: string) {
+    const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8' });
+    return parse(
+        fileContent,
+        {
+            delimiter: ',',
+            columns: true,
+            skip_empty_lines: true,
+        }
+    );
 }
 
 function createTransaction(parsedData: any): TransactionItem[] {
@@ -23,16 +35,4 @@ function createTransaction(parsedData: any): TransactionItem[] {
         }
     }
     return transactions;
-}
-
-function parseCSV(filePath: string) {
-    const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8' });
-    return parse(
-        fileContent,
-        {
-            delimiter: ',',
-            columns: true,
-            skip_empty_lines: true,
-        }
-    );
 }

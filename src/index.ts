@@ -1,10 +1,8 @@
 // Using import causes ES5 error for private properties
 import dotenv from 'dotenv';
 import { createTransactions } from './csv-parser';
-import { createPage, getPage } from './notion-api/page';
+import { createPage } from './notion-api/page';
 import { Client } from "@notionhq/client";
-import { NOTION_SECRET } from "./config/environment";
-import { getDatabase } from './notion-api/database';
 
 dotenv.config();
 

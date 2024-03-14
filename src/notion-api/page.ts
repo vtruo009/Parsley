@@ -1,7 +1,6 @@
 import { TransactionItem } from "../mixins";
-import { PropertyType, RichTextType, Category, Color } from "../enums";
+import { PropertyType, RichTextType } from "../enums";
 import { notion } from "..";
-import { NOTION_DATABASE_ID } from "../config/environment";
 
 export async function getPage(pageId: string) {
     return await notion.pages.retrieve({ page_id: pageId });
