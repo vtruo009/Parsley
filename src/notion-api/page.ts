@@ -71,3 +71,8 @@ export function createPage(transaction: TransactionItem) {
         throw new Error(`Error creating a page for ${transaction.description}`);
     });
 }
+
+module.exports = {
+    getPage,
+    createPage,
+}

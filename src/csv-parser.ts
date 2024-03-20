@@ -36,3 +36,7 @@ function createTransaction(parsedData: any): TransactionItem[] {
     }
     return transactions;
 }
+
+module.exports = {
+    createTransactions,
+}
