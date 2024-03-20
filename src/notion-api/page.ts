@@ -1,6 +1,9 @@
 import { TransactionItem } from "../mixins";
 import { PropertyType, RichTextType } from "../enums";
-import { notion } from "..";
+import { Client } from "@notionhq/client";
+import { NOTION_SECRET, NOTION_DATABASE_ID } from "../config/environment";
+
+export const notion = new Client({ auth: NOTION_SECRET });
 
 export async function getPage(pageId: string) {
     return await notion.pages.retrieve({ page_id: pageId });
@@ -10,7 +13,7 @@ export function createPage(transaction: TransactionItem) {
     notion.pages.create({
         parent: {
             type: 'database_id',
-            database_id: process.env.NOTION_DATABASE_ID || '',
+            database_id: NOTION_DATABASE_ID,
         },
         properties: {
             Description: {
