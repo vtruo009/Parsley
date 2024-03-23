@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import { TransactionItem } from './mixins';
 import { Category } from './enums';
 
-export function createTransactions() {
-    const parsedData = parseCSV('bank-statements/chase-2023-11-24.CSV');
+export function createTransactions(filename: string) {
+    const parsedData = parseCSV(`./csv-files/${filename}`);
     return createTransaction(parsedData);
 }
 

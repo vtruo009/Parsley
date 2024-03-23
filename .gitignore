@@ -15,8 +15,8 @@ environment.txt
 # logs
 *.log
 
-# bank statements
-bank-statements/**
+# csv-files
+csv-files/**
 
 # Environment variables
 **/*.env

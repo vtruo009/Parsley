@@ -3,6 +3,7 @@ import path from 'path';
 import fileupload from 'express-fileupload';
 import { PORT } from './config/environment';
 import { createTransactions } from './csv-parser';
+import { createPage } from './notion';
 
 const app = express();
 app.use(fileupload())
@@ -24,7 +25,14 @@ app.post('/create-transactions', async (req, res) => {
             return res.status(500).send(`Something went wrong with copying file: ${err}`);
         }
         console.debug(`Successfully uploaded file ${file.name}`);
+
+        const transactions = createTransactions(file.name);
+        transactions.forEach(transaction => {
+            createPage(transaction);
+        });
+
+        res.send(`Successfully created transactions!`);
     });
-})
+});
 
 app.listen(PORT);
