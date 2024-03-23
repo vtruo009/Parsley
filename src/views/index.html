@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notion Finance Tracker</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Notion Finance Tracker</title>
+    </head>
 
-<body>
-    <form action="/create-transactions" method="POST">
-        <input type="file" name="csv-file" />
-        <input type="submit" name="upload" />
-    </form>
+    <body>
+        <form action="/create-transactions" method="POST" enctype="multipart/form-data">
+            <div>
+                <input type="file" name="csvFile" id="csvFile" />
+                <button type="submit">Upload</button>
+            </div>
+        </form>
 
-    <script src="src/server.ts">
+        <script src="dist/src/server.js">
 
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>

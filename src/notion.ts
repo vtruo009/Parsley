@@ -1,13 +1,9 @@
-import { TransactionItem } from "../mixins";
-import { PropertyType, RichTextType } from "../enums";
+import { TransactionItem } from "./mixins";
+import { PropertyType, RichTextType } from "./enums";
 import { Client } from "@notionhq/client";
-import { NOTION_SECRET, NOTION_DATABASE_ID } from "../config/environment";
+import { NOTION_SECRET, NOTION_DATABASE_ID } from "./config/environment";
 
 export const notion = new Client({ auth: NOTION_SECRET });
-
-export async function getPage(pageId: string) {
-    return await notion.pages.retrieve({ page_id: pageId });
-}
 
 export function createPage(transaction: TransactionItem) {
     notion.pages.create({
@@ -73,6 +69,5 @@ export function createPage(transaction: TransactionItem) {
 }
 
 module.exports = {
-    getPage,
     createPage,
 }
