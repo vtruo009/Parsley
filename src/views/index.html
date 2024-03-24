@@ -10,7 +10,15 @@
     <body>
         <form action="/create-transactions" method="POST" enctype="multipart/form-data">
             <div>
-                <input type="file" name="csvFile" id="csvFile" />
+                <label>Notion API Token:</label>
+                <input type="password" name="notionAPIToken" id="notion-api-token" />
+            </div>
+            <div>
+                <label>Notion Database ID:</label>
+                <input type="text" name="notionDatabaseID" id="notion-database-id" />
+            </div>
+            <div>
+                <input type="file" name="csvFile" id="csv-file" />
                 <button type="submit">Upload</button>
             </div>
         </form>
