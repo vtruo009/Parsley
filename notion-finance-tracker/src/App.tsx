@@ -1,4 +1,4 @@
-import InfoCard from "./Card";
+import InfoCard from "./InfoCard";
 
 function App() {
   return (
