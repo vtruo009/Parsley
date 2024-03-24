@@ -1,9 +1,19 @@
+import styled from "styled-components";
 import InfoCard from "./InfoCard";
 
+const StyledContainer = styled.div`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
+
 function App() {
-  return (
-    <InfoCard />
-  )
+	return (
+		<StyledContainer>
+			<InfoCard />
+		</StyledContainer>
+	)
 }
 
 export default App
