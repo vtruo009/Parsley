@@ -11,6 +11,7 @@ const StyledInputField = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px;
+    width: 50%;
 `;
 
 function InputField(props: InputFieldProps) {

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import InputField from "./InputField";
+import UploadButton from "./UploadButton";
 
 const StyledDiv = styled.div`
     width: 500px;
@@ -21,24 +22,23 @@ const StyledTitle = styled.h3`
     font-size: xx-large;
 `;
 
-const StyledForm = styled.form`
+const StyledForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    margin: 0px 10px;
 `;
 
 function InfoCard() {
     return (
         <StyledDiv>
             <StyledTitle>Notion Finance Tracker</StyledTitle>
-            <StyledForm action="/create-transactions" method="POST" encType="multipart/form-data">
+            <StyledForm >
                 <InputField label='API Token: ' type='password' name='apiToken' id='api-token' />
                 <InputField label='Database ID:' type='text' name='databaseID' id='database-id' />
                 <InputField type='file' name='csvFile' id='csv-file' />
-                <div>
-                    <button type="submit">Upload</button>
-                </div>
+                <UploadButton />
             </StyledForm>
         </StyledDiv>
     )
