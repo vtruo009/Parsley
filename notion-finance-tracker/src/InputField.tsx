@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface InputFieldProps {
-    label: string;
+    label?: string;
     type: string;
     name: string;
     id: string;
@@ -16,7 +16,7 @@ const StyledInputField = styled.div`
 function InputField(props: InputFieldProps) {
     return (
         <StyledInputField>
-            <label>{props.label}</label>
+            {props.label && <label>{props.label}</label>}
             <input type={props.type} name={props.name} id={props.id} />
         </StyledInputField>
     )
