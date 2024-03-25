@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import InputField from "./InputField";
-import UploadButton from "./UploadButton";
+import Button from "./Button";
 
 const StyledDiv = styled.div`
     width: 500px;
@@ -38,7 +38,7 @@ function InfoCard() {
                 <InputField label='API Token: ' type='password' name='apiToken' id='api-token' />
                 <InputField label='Database ID:' type='text' name='databaseID' id='database-id' />
                 <InputField type='file' name='csvFile' id='csv-file' />
-                <UploadButton />
+                <Button />
             </StyledForm>
         </StyledDiv>
     )

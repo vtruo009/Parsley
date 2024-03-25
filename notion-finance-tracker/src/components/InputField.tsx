@@ -10,7 +10,7 @@ interface InputFieldProps {
 const StyledInputField = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 20px;
     width: 50%;
 `;
 

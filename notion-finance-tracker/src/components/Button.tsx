@@ -5,10 +5,13 @@ const StyledButton = styled.button`
     background: none;
     border: 1px solid gray;
     border-radius: 5px;
+    cursor: pointer;
+    background-color: #EEB39E;
+    margin-top: 100px;
 `;
 
 function ButtonClicked() {
-    fetch('http://localhost:3000/',
+    fetch('http://localhost:3000/test',
         {
             method: 'GET',
             mode: 'no-cors',
@@ -20,12 +23,12 @@ function ButtonClicked() {
         .then(() => console.log('Button is clicked!'));
 }
 
-function UploadButton() {
+function Button() {
     return (
         <StyledButton onClick={ButtonClicked}>
-            <h3>Upload</h3>
+            <h3>Process</h3>
         </StyledButton>
     )
 }
 
-export default UploadButton;
+export default Button;
