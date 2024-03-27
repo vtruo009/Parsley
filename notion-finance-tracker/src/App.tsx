@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import InfoCard from "./components/InfoCard";
+import { Routes, Route } from "react-router-dom";
 
 const StyledContainer = styled.div`
 	position: absolute;
@@ -11,7 +12,9 @@ const StyledContainer = styled.div`
 function App() {
 	return (
 		<StyledContainer>
-			<InfoCard />
+			<Routes>
+				<Route path='/' element={<InfoCard />} />
+			</Routes>
 		</StyledContainer>
 	)
 }

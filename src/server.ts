@@ -20,7 +20,7 @@ app.post('/create-transactions', async (req, res) => {
     }
 
     const file = req.files.csvFile as fileupload.UploadedFile;
-    file.mv(`./bank-statements/${file.name}`, (err) => {
+    file.mv(`./csv-files/${file.name}`, (err) => {
         if (err) {
             return res.status(500).send(`Something went wrong with copying file: ${err}`);
         }

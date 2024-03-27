@@ -10,25 +10,36 @@ const StyledButton = styled.button`
     margin-top: 100px;
 `;
 
-function ButtonClicked() {
-    fetch('http://localhost:3000/test',
-        {
-            method: 'GET',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    )
-        .then(() => console.log('Button is clicked!'));
-}
+function Button({ file }: { file: File | undefined }) {
 
-function Button() {
+    function handleButtonClick(event: React.SyntheticEvent) {
+        event.preventDefault();
+
+        if (typeof file === 'undefined') {
+            console.log('File is undefined');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('csvFile', file);
+
+        fetch('http://localhost:3000/create-transactions', {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData,
+            headers: {
+                'Content-Type': 'text/csv'
+            }
+        })
+            .then(() => console.log('Successfully sent file to server!'))
+            .catch(err => console.log(`Error sending file to server...: ${err}`));
+    }
+
     return (
-        <StyledButton onClick={ButtonClicked}>
+        <StyledButton type='submit' onClick={handleButtonClick}>
             <h3>Process</h3>
-        </StyledButton>
-    )
+        </StyledButton >
+    );
 }
 
 export default Button;
