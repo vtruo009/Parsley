@@ -3,8 +3,7 @@ import Button from "./Button";
 import { useState } from "react";
 
 const StyledDiv = styled.div`
-    width: 500px;
-    height: 600px;
+    height: 100px;
     border: solid 2px gray;
     border-radius: 20px;
     background-color: #F5F5F2;
@@ -17,24 +16,43 @@ const StyledDiv = styled.div`
     ;
 `;
 
-const StyledTitle = styled.h3`
-    text-align: center;
-    font-size: xx-large;
-`;
-
 const StyledForm = styled.form`
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    justify-content: space-evenly;
-    margin: 0px 10px;
 `;
 
-const StyledInputDiv = styled.div`
+const StyledFileUpload = styled.div`
+    width: 70%;
+    height: 50px;
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    width: 50%;
+    justify-content: center;
+    align-items: center;
+
+    label {
+        margin: 5px;
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    label > img {
+        width: 30px;
+        height: 30px;
+        margin: 0px 5px;
+    }
+    input[type='file'] {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
 `;
 
 function InfoCard() {
@@ -44,29 +62,20 @@ function InfoCard() {
     async function handleOnChange(event: React.FormEvent<HTMLInputElement>) {
         const target = event.target as HTMLInputElement;
 
-        if (!target.files) {
-            console.debug('No file selected...');
-            return;
-        }
+        if (!target.files) return
         setFile(target.files[0])
     }
 
     return (
         <StyledDiv>
-            <StyledTitle>Notion Finance Tracker</StyledTitle>
             <StyledForm encType="multipart/form-data">
-                <StyledInputDiv>
-                    <label>Notion API Token</label>
-                    <input type='text' name='password' id='api-token' />
-                </StyledInputDiv>
-                <StyledInputDiv>
-                    <label>Notion Database ID</label>
-                    <input type='text' name='password' id='api-token' />
-                </StyledInputDiv>
-                <StyledInputDiv>
-                    <label>CSV File</label>
+                <StyledFileUpload>
+                    <label>
+                        <img src='https://img.icons8.com/ios/250/000000/import-csv.png' />
+                        {<p>{file?.name || 'Select CSV File'}</p>}
+                    </label>
                     <input type='file' name='csvFIle' id='csv-file' onChange={handleOnChange} />
-                </StyledInputDiv>
+                </StyledFileUpload>
                 <Button file={file} />
             </StyledForm>
         </StyledDiv>
