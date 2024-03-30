@@ -13,8 +13,8 @@ export interface TransactionItem {
     memo: string;
 }
 
-export function createTransactions(filename: string) {
-    const parsedData = parseCSV(`./csv-files/${filename}`);
+export function createTransactions(tempFilePath: string) {
+    const parsedData = parseCSV(`${tempFilePath}`);
     return createTransaction(parsedData);
 }
 

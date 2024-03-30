@@ -6,7 +6,10 @@ import { createPage } from './notion';
 import { deleteCSV } from './utils/csv-file';
 
 const app = express();
-app.use(fileupload())
+app.use(fileupload({
+    useTempFiles: true,
+    tempFileDir: '/tmp',
+}));
 
 app.get('/', async (req, res) => {
     res.send('Welcome to Notion Finance Tracker!');
@@ -18,20 +21,20 @@ app.post('/create-transactions', async (req, res) => {
     }
 
     const file = req.files.csvFile as fileupload.UploadedFile;
-    file.mv(`./csv-files/${file.name}`, (err) => {
+    file.mv(file.tempFilePath, (err) => {
         if (err) {
             console.log(err)
             return res.status(500).send(`Something went wrong with copying file: ${err}`);
         }
-        console.debug(`Successfully uploaded file ${file.name}`);
+        console.debug('Successfully uploaded file: ', file);
 
-        const transactions = createTransactions(file.name);
+        const transactions = createTransactions(file.tempFilePath);
         transactions.forEach(transaction => {
             createPage(transaction);
         });
 
         try {
-            deleteCSV(file.name);
+            deleteCSV(file.tempFilePath);
         } catch (err) {
             console.log(`Error deleting file ${file.name}: ${err}`);
         }
