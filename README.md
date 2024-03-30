@@ -1,6 +1,6 @@
-# Notion Financial Tracker :chart_with_upwards_trend:
+# Parsley :chart_with_upwards_trend:
 
-Help streamline monthly budgeting by automating the creation of credit card transactions.
+Parses CSV files and help streamline monthly budgeting by automating the creation of credit card transactions.
 
 ## Description :memo:
 
