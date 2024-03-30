@@ -3,6 +3,7 @@ import fileupload from 'express-fileupload';
 import { PORT } from './utils/environment';
 import { createTransactions } from './transactions';
 import { createPage } from './notion';
+import { deleteCSV } from './utils/csv-file';
 
 const app = express();
 app.use(fileupload())
@@ -23,6 +24,12 @@ app.post('/create-transactions', async (req, res) => {
         transactions.forEach(transaction => {
             createPage(transaction);
         });
+
+        try {
+            deleteCSV(file.name);
+        } catch (err) {
+            console.log(`Error deleting file ${file.name}: ${err}`);
+        }
 
         res.send(`Successfully created transactions!`);
     });

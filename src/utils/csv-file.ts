@@ -12,3 +12,10 @@ export function parseCSV(filePath: string) {
         }
     );
 }
+
+export function deleteCSV(file: string) {
+    fs.unlink(`csv-files/${file}`, (err) => {
+        if (err) throw err;
+        console.debug(`${file} was successfully deleted...`);
+    })
+}
