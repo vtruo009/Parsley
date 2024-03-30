@@ -1,4 +1,4 @@
-# Parsley :chart_with_upwards_trend:
+# Parsley :herb:
 
 Parses CSV files and help streamline monthly budgeting by automating the creation of credit card transactions.
 
