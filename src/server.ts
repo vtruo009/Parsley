@@ -1,7 +1,7 @@
 import express from 'express';
 import fileupload from 'express-fileupload';
-import { PORT } from './config/environment';
-import { createTransactions } from './csv-parser';
+import { PORT } from './utils/environment';
+import { createTransactions } from './transactions';
 import { createPage } from './notion';
 
 const app = express();

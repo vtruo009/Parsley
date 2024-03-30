@@ -1,23 +1,21 @@
-import { parse } from 'csv-parse/sync';
-import fs from 'fs';
-import { TransactionItem } from './interface';
 import { Category } from './enums';
+import { parseCSV } from './utils/csv-file';
+
+/**
+ * Properties to be specified in instances of {@link TransactionItem}
+ */
+export interface TransactionItem {
+    transactionDate: string;
+    postDate: string;
+    description: string;
+    amount: number;
+    category: Category;
+    memo: string;
+}
 
 export function createTransactions(filename: string) {
     const parsedData = parseCSV(`./csv-files/${filename}`);
     return createTransaction(parsedData);
-}
-
-function parseCSV(filePath: string) {
-    const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8' });
-    return parse(
-        fileContent,
-        {
-            delimiter: ',',
-            columns: true,
-            skip_empty_lines: true,
-        }
-    );
 }
 
 function createTransaction(parsedData: any): TransactionItem[] {

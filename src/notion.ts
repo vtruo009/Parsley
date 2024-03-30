@@ -1,7 +1,7 @@
-import { TransactionItem } from "./interface";
+import { TransactionItem } from "./transactions";
 import { PropertyType, RichTextType } from "./enums";
 import { Client } from "@notionhq/client";
-import { NOTION_SECRET, NOTION_DATABASE_ID } from "./config/environment";
+import { NOTION_SECRET, NOTION_DATABASE_ID } from "./utils/environment";
 
 export const notion = new Client({ auth: NOTION_SECRET });
 
