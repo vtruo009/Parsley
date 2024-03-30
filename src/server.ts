@@ -8,6 +8,10 @@ import { deleteCSV } from './utils/csv-file';
 const app = express();
 app.use(fileupload())
 
+app.get('/', async (req, res) => {
+    res.send('Welcome to Notion Finance Tracker!');
+})
+
 app.post('/create-transactions', async (req, res) => {
     if (!req.files || Object.keys(req.files).length === 0) {
         return res.status(400).send('No files were uploaded.');
