@@ -1,6 +1,6 @@
 import { parse } from 'csv-parse/sync';
-import * as fs from 'fs';
-import { TransactionItem } from './mixins';
+import fs from 'fs';
+import { TransactionItem } from './interface';
 import { Category } from './enums';
 
 export function createTransactions(filename: string) {

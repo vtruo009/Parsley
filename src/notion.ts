@@ -1,4 +1,4 @@
-import { TransactionItem } from "./mixins";
+import { TransactionItem } from "./interface";
 import { PropertyType, RichTextType } from "./enums";
 import { Client } from "@notionhq/client";
 import { NOTION_SECRET, NOTION_DATABASE_ID } from "./config/environment";
