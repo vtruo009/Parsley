@@ -15,8 +15,5 @@ environment.txt
 # logs
 *.log
 
-# csv-files
-csv-files/**
-
 # Environment variables
 **/*.env

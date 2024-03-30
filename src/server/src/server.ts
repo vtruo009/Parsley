@@ -20,6 +20,7 @@ app.post('/create-transactions', async (req, res) => {
     const file = req.files.csvFile as fileupload.UploadedFile;
     file.mv(`./csv-files/${file.name}`, (err) => {
         if (err) {
+            console.log(err)
             return res.status(500).send(`Something went wrong with copying file: ${err}`);
         }
         console.debug(`Successfully uploaded file ${file.name}`);
