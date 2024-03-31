@@ -2,8 +2,9 @@ import express from 'express';
 import fileupload from 'express-fileupload';
 import { PORT } from './utils/environment';
 import { createTransactions } from './transactions';
-import { createPage } from './notion';
+import { createPage, getDatabase, searchDatabases } from './notion';
 import { deleteCSV } from './utils/csv-file';
+import { DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 const app = express();
 app.use(fileupload({
@@ -13,6 +14,21 @@ app.use(fileupload({
 
 app.get('/', async (req, res) => {
     res.send('Welcome to Notion Finance Tracker!');
+})
+
+app.get('/search', async (req, res) => {
+    const databases = await searchDatabases(req.body);
+
+    const databaseOptions = await Promise.all(databases.results.map(async (item) => {
+        const database = await getDatabase(item.id) as DatabaseObjectResponse;
+        return {
+            id: item.id,
+            title: database.title.length > 0 ? database.title[0].plain_text : 'Untitled',
+        };
+    }));
+
+    console.log('Finished getting all shared databases...');
+    res.send(databaseOptions);
 })
 
 app.post('/create-transactions', async (req, res) => {
@@ -29,8 +45,8 @@ app.post('/create-transactions', async (req, res) => {
         console.debug('Successfully uploaded file: ', file);
 
         const transactions = createTransactions(file.tempFilePath);
-        transactions.forEach(transaction => {
-            createPage(transaction);
+        transactions.forEach(async (transaction) => {
+            await createPage(transaction);
         });
 
         try {
