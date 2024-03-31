@@ -19,7 +19,7 @@ If haven't done so, please make sure backend is set up following this [guide](sr
     yarn build
     ```
 
-2. Open another terminal & epeat step 1 but within the `client` directory
+2. Open another terminal & repeat step 1 but within the `client` directory
 
 3. Run `yarn dev`
 
