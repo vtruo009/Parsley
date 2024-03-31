@@ -3,7 +3,8 @@ import Button from "./Button";
 import { useState } from "react";
 
 const StyledDiv = styled.div`
-    height: 100px;
+    width: 200px;
+    height: 250px;
     border: solid 2px gray;
     border-radius: 20px;
     background-color: #F5F5F2;
@@ -14,21 +15,29 @@ const StyledDiv = styled.div`
       0 8px 8px hsl(0deg 0% 0% / 0.075),
       0 16px 16px hsl(0deg 0% 0% / 0.075)
     ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const StyledForm = styled.form`
     height: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    padding: 20px 0px;
+
+    select {
+        width: 80%;
+        height: 30px;
+        border-radius: 5px;
+    }
 `;
 
 const StyledFileUpload = styled.div`
     width: 70%;
-    height: 50px;
-    background-color: white;
-    border-radius: 5px;
+    height: 100px;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -37,16 +46,18 @@ const StyledFileUpload = styled.div`
     label {
         margin: 5px;
         position: absolute;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
     }
 
     label > img {
-        width: 30px;
-        height: 30px;
+        width: 50px;
+        height: 50px;
         margin: 0px 5px;
     }
+
+    label > p {
+        margin: 5px;
+    }
+    
     input[type='file'] {
         opacity: 0;
         width: 100%;
@@ -69,6 +80,9 @@ function InfoCard() {
     return (
         <StyledDiv>
             <StyledForm encType="multipart/form-data">
+                <select>
+                    <option value='database-1' >Database 1</option>
+                </select>
                 <StyledFileUpload>
                     <label>
                         <img src='https://img.icons8.com/ios/250/000000/import-csv.png' />
