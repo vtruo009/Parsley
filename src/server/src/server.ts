@@ -27,8 +27,15 @@ app.get('/search', async (req, res) => {
         };
     }));
 
-    console.log('Finished getting all shared databases...');
-    res.send(databaseOptions);
+    console.debug('Finished getting all shared databases...', databaseOptions);
+
+    res.set({
+        'Access-Control-Allow-Origin': ['*']
+    })
+    res.send({
+        status: 200,
+        data: databaseOptions,
+    });
 })
 
 app.post('/create-transactions', async (req, res) => {

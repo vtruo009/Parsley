@@ -77,11 +77,27 @@ function InfoCard() {
         setFile(target.files[0])
     }
 
+    async function loadOptions(event: React.SyntheticEvent) {
+        console.log('hello?')
+        event.preventDefault();
+
+        await fetch('http://localhost:3000/search', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            }
+        })
+            .then((res) => res.json())
+            .then(data => console.log('set stuff', data))
+            .catch((err) => console.log(err))
+    }
+
     return (
         <StyledDiv>
             <StyledForm encType="multipart/form-data">
-                <select>
+                <select onChange={loadOptions}>
                     <option value='database-1' >Database 1</option>
+                    <option value='database-2' >Database 2</option>
                 </select>
                 <StyledFileUpload>
                     <label>
