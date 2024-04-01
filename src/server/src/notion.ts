@@ -62,7 +62,7 @@ export async function createPage(transaction: TransactionItem): Promise<void> {
                     ]
                 }
             }
-        })
+        });
         console.log(`Created item ${transaction.description} w/ id: ${resp.id}`);
     } catch (err) {
         console.log(err);
@@ -95,7 +95,6 @@ export async function getDatabase(id: string): Promise<GetDatabaseResponse> {
         const database = await notion.databases.retrieve({
             database_id: id,
         });
-
         return database;
     } catch (err) {
         throw err;

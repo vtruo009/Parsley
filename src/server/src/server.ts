@@ -17,13 +17,12 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/search', async (req, res) => {
-    const databases = await searchDatabases(req.body);
+    const databases = (await searchDatabases(req.body)).results as DatabaseObjectResponse[];
 
-    const databaseOptions = await Promise.all(databases.results.map(async (item) => {
-        const database = await getDatabase(item.id) as DatabaseObjectResponse;
+    const databaseOptions = await Promise.all(databases.map(async (item) => {
         return {
             id: item.id,
-            title: database.title.length > 0 ? database.title[0].plain_text : 'Untitled',
+            title: item.title.length > 0 ? item.title[0].plain_text : 'Untitled',
         };
     }));
 

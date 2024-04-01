@@ -101,7 +101,7 @@ function InfoCard() {
             <StyledForm encType="multipart/form-data">
                 <select>
                     {dropdownOptions?.map(option => {
-                        return <option value={option.id} key={option.id}>{option.title}</option>
+                        return <option value={option.id} key={option.id} >{option.title}</option>
                     })}
                 </select>
                 <StyledFileUpload>
