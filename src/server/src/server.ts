@@ -1,9 +1,9 @@
 import express from 'express';
 import fileupload from 'express-fileupload';
 import { PORT } from './utils/environment';
-import { createTransactions } from './transactions';
+import { createTransactions } from './utils/helpers';
 import { createPage, getDatabase, searchDatabases } from './notion';
-import { deleteCSV } from './utils/csv-file';
+import { deleteCSV } from './utils/helpers';
 import { DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 const app = express();

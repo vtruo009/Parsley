@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Button from "./Button";
 import { useEffect, useState } from "react";
+import { Database } from '../../../server/src/utils/interfaces';
 
 const StyledDiv = styled.div`
     width: 200px;
@@ -69,11 +70,10 @@ const StyledFileUpload = styled.div`
 function InfoCard() {
 
     const [file, setFile] = useState<File | undefined>();
-    const [dropdownOptions, setDropdownOptions] = useState<[Object]>();
+    const [dropdownOptions, setDropdownOptions] = useState<[Database] | []>();
 
     useEffect(() => {
         loadOptions().then(resp => {
-            console.log('this is what im getting: ', resp);
             setDropdownOptions(resp);
         });
     }, [])
@@ -85,7 +85,7 @@ function InfoCard() {
         setFile(target.files[0])
     }
 
-    async function loadOptions(): Promise<[Object]> {
+    async function loadOptions(): Promise<[Database]> {
         return await fetch('http://localhost:3000/search', {
             method: 'GET',
             headers: {

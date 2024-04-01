@@ -1,10 +1,10 @@
-import { TransactionItem } from "./transactions";
-import { PropertyType, RichTextType } from "./enums";
+import { TransactionItem } from "./utils/interfaces";
+import { PropertyType, RichTextType } from "./utils/enums";
 import { Client } from "@notionhq/client";
 import { NOTION_SECRET, NOTION_DATABASE_ID } from "./utils/environment";
 import { GetDatabaseResponse, SearchResponse } from "@notionhq/client/build/src/api-endpoints";
 
-export const notion = new Client({ auth: NOTION_SECRET });
+const notion = new Client({ auth: NOTION_SECRET });
 
 export async function createPage(transaction: TransactionItem): Promise<void> {
     try {
