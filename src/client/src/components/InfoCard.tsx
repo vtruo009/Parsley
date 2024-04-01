@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "./Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const StyledDiv = styled.div`
     width: 200px;
@@ -69,6 +69,14 @@ const StyledFileUpload = styled.div`
 function InfoCard() {
 
     const [file, setFile] = useState<File | undefined>();
+    const [dropdownOptions, setDropdownOptions] = useState<[Object]>();
+
+    useEffect(() => {
+        loadOptions().then(resp => {
+            console.log('this is what im getting: ', resp);
+            setDropdownOptions(resp);
+        });
+    }, [])
 
     async function handleOnChange(event: React.FormEvent<HTMLInputElement>) {
         const target = event.target as HTMLInputElement;
@@ -77,27 +85,24 @@ function InfoCard() {
         setFile(target.files[0])
     }
 
-    async function loadOptions(event: React.SyntheticEvent) {
-        console.log('hello?')
-        event.preventDefault();
-
-        await fetch('http://localhost:3000/search', {
+    async function loadOptions(): Promise<[Object]> {
+        return await fetch('http://localhost:3000/search', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
             }
         })
             .then((res) => res.json())
-            .then(data => console.log('set stuff', data))
             .catch((err) => console.log(err))
     }
 
     return (
         <StyledDiv>
             <StyledForm encType="multipart/form-data">
-                <select onChange={loadOptions}>
-                    <option value='database-1' >Database 1</option>
-                    <option value='database-2' >Database 2</option>
+                <select>
+                    {dropdownOptions?.map(option => {
+                        return <option value={option.id} key={option.id}>{option.title}</option>
+                    })}
                 </select>
                 <StyledFileUpload>
                     <label>

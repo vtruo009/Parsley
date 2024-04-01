@@ -30,12 +30,9 @@ app.get('/search', async (req, res) => {
     console.debug('Finished getting all shared databases...', databaseOptions);
 
     res.set({
-        'Access-Control-Allow-Origin': ['*']
-    })
-    res.send({
-        status: 200,
-        data: databaseOptions,
+        'Access-Control-Allow-Origin': ['http://localhost:5173'],
     });
+    res.send(databaseOptions);
 })
 
 app.post('/create-transactions', async (req, res) => {
