@@ -71,7 +71,8 @@ const StyledFileUpload = styled.div`
 function InfoCard() {
 
     const [file, setFile] = useState<File | undefined>();
-    const [database, setDatabase] = useState<string>('');
+    const [disabled, setDisabled] = useState<boolean>(true);
+    const [databaseID, setDatabaseID] = useState<string>('');
     const [query, setQuery] = useState("");
 
     async function handleOnChange(event: React.FormEvent<HTMLInputElement>) {
@@ -79,6 +80,7 @@ function InfoCard() {
 
         if (!target.files) return
         setFile(target.files[0])
+        setDisabled(false);
     }
 
     async function loadOptions(): Promise<Database[]> {
@@ -102,7 +104,7 @@ function InfoCard() {
                     onInputChange={(value) => setQuery(value)}
                     getOptionLabel={(option) => (option as Database).title}
                     getOptionValue={(option) => (option as Database).id}
-                    onChange={(value) => setDatabase((value as Database).id)}
+                    onChange={(value) => setDatabaseID((value as Database).id)}
                 />
                 <StyledFileUpload>
                     <label>
@@ -111,7 +113,7 @@ function InfoCard() {
                     </label>
                     <input type='file' name='csvFIle' id='csv-file' onChange={handleOnChange} />
                 </StyledFileUpload>
-                <Button file={file} />
+                <Button file={file} databaseID={databaseID} disabled={disabled} />
             </StyledForm>
         </StyledDiv>
     );

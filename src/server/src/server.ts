@@ -32,7 +32,7 @@ app.get('/search/:query?', async (req, res) => {
     res.send(databaseOptions);
 })
 
-app.post('/create-transactions', async (req, res) => {
+app.post('/create-transactions/:databaseID', async (req, res) => {
     if (!req.files || Object.keys(req.files).length === 0) {
         return res.status(400).send('No files were uploaded.');
     }
@@ -47,7 +47,7 @@ app.post('/create-transactions', async (req, res) => {
 
         const transactions = createTransactions(file.tempFilePath);
         transactions.forEach(async (transaction) => {
-            await createPage(transaction);
+            await createPage(transaction, req.params.databaseID);
         });
 
         try {

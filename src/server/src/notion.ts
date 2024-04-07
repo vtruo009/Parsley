@@ -6,12 +6,12 @@ import { GetDatabaseResponse, SearchResponse } from "@notionhq/client/build/src/
 
 const notion = new Client({ auth: NOTION_SECRET });
 
-export async function createPage(transaction: TransactionItem): Promise<void> {
+export async function createPage(transaction: TransactionItem, databaseID: string): Promise<void> {
     try {
         const resp = await notion.pages.create({
             parent: {
                 type: 'database_id',
-                database_id: NOTION_DATABASE_ID,
+                database_id: databaseID,
             },
             properties: {
                 Description: {
