@@ -105,6 +105,13 @@ function InfoCard() {
                     getOptionLabel={(option) => (option as Database).title}
                     getOptionValue={(option) => (option as Database).id}
                     onChange={(value) => setDatabaseID((value as Database).id)}
+                    styles={{
+                        option: (baseStyles, state) => ({
+                            ...baseStyles,
+                            backgroundColor: state.isFocused ? '#B9EBFF' : 'white',
+                        }),
+                    }}
+                    placeholder='🔎 database...'
                 />
                 <StyledFileUpload>
                     <label>
