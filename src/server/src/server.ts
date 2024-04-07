@@ -16,8 +16,8 @@ app.get('/', async (req, res) => {
     res.send('Welcome to Notion Finance Tracker!');
 })
 
-app.get('/search', async (req, res) => {
-    const databases = (await searchDatabases(req.body)).results as DatabaseObjectResponse[];
+app.get('/search/:query?', async (req, res) => {
+    const databases = (await searchDatabases(req.params.query || '')).results as DatabaseObjectResponse[];
 
     const databaseOptions = await Promise.all(databases.map(async (item) => {
         return {
@@ -28,9 +28,7 @@ app.get('/search', async (req, res) => {
 
     console.debug('Finished getting all shared databases...', databaseOptions);
 
-    res.set({
-        'Access-Control-Allow-Origin': ['http://localhost:5173'],
-    });
+    res.setHeader('Access-Control-Allow-Origin', ['http://localhost:5173']);
     res.send(databaseOptions);
 })
 

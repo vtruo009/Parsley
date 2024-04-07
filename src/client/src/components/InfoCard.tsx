@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Button from "./Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Database } from '../../../server/src/utils/interfaces';
+import AsyncSelect from 'react-select/async';
 
 const StyledDiv = styled.div`
     width: 200px;
@@ -28,12 +29,12 @@ const StyledForm = styled.form`
     justify-content: space-between;
     align-items: center;
     padding: 20px 0px;
+`;
 
-    select {
-        width: 80%;
-        height: 30px;
-        border-radius: 5px;
-    }
+const StyledAsyncSelect = styled(AsyncSelect)`
+    width: 80%;
+    height: 30px;
+    border-radius: 5px;
 `;
 
 const StyledFileUpload = styled.div`
@@ -70,13 +71,8 @@ const StyledFileUpload = styled.div`
 function InfoCard() {
 
     const [file, setFile] = useState<File | undefined>();
-    const [dropdownOptions, setDropdownOptions] = useState<[Database] | []>();
-
-    useEffect(() => {
-        loadOptions().then(resp => {
-            setDropdownOptions(resp);
-        });
-    }, [])
+    const [database, setDatabase] = useState<string>('');
+    const [query, setQuery] = useState("");
 
     async function handleOnChange(event: React.FormEvent<HTMLInputElement>) {
         const target = event.target as HTMLInputElement;
@@ -85,8 +81,8 @@ function InfoCard() {
         setFile(target.files[0])
     }
 
-    async function loadOptions(): Promise<[Database]> {
-        return await fetch('http://localhost:3000/search', {
+    async function loadOptions(): Promise<Database[]> {
+        return await fetch(`http://localhost:3000/search/${query}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -99,11 +95,15 @@ function InfoCard() {
     return (
         <StyledDiv>
             <StyledForm encType="multipart/form-data">
-                <select>
-                    {dropdownOptions?.map(option => {
-                        return <option value={option.id} key={option.id} >{option.title}</option>
-                    })}
-                </select>
+                <StyledAsyncSelect
+                    cacheOptions
+                    defaultOptions
+                    loadOptions={loadOptions}
+                    onInputChange={(value) => setQuery(value)}
+                    getOptionLabel={(option) => (option as Database).title}
+                    getOptionValue={(option) => (option as Database).id}
+                    onChange={(value) => setDatabase((value as Database).id)}
+                />
                 <StyledFileUpload>
                     <label>
                         <img src='https://img.icons8.com/ios/250/000000/import-csv.png' />
