@@ -14,23 +14,27 @@ app.use(fileupload({
 
 app.get('/', async (req, res) => {
     res.send('Welcome to Notion Finance Tracker!');
-})
+});
 
 app.get('/search/:query?', async (req, res) => {
-    const databases = (await searchDatabases(req.params.query || '')).results as DatabaseObjectResponse[];
+    try {
+        const databases = (await searchDatabases(req.params.query || '')).results as DatabaseObjectResponse[];
 
-    const databaseOptions = await Promise.all(databases.map(async (item) => {
-        return {
-            id: item.id,
-            title: item.title.length > 0 ? item.title[0].plain_text : 'Untitled',
-        };
-    }));
+        const databaseOptions = await Promise.all(databases.map(async (item) => {
+            return {
+                id: item.id,
+                title: item.title.length > 0 ? item.title[0].plain_text : 'Untitled',
+            };
+        }));
 
-    console.debug('Finished getting all shared databases...', databaseOptions);
+        console.debug('Finished getting all shared databases...', databaseOptions);
 
-    res.setHeader('Access-Control-Allow-Origin', ['http://localhost:5173']);
-    res.send(databaseOptions);
-})
+        res.setHeader('Access-Control-Allow-Origin', ['http://localhost:5173']);
+        res.send(databaseOptions);
+    } catch (err) {
+        res.send(err)
+    }
+});
 
 app.post('/create-transactions/:databaseID', async (req, res) => {
     if (!req.files || Object.keys(req.files).length === 0) {
