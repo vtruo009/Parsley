@@ -3,6 +3,7 @@ import Button from "./Button";
 import { useState } from "react";
 import { Database } from '../../../server/src/utils/interfaces';
 import AsyncSelect from 'react-select/async';
+import { StylesConfig } from "react-select";
 
 const StyledDiv = styled.div`
     width: 200px;
@@ -68,6 +69,19 @@ const StyledFileUpload = styled.div`
     }
 `;
 
+const styles: StylesConfig = {
+    option: (baseStyles, state) => ({
+        ...baseStyles,
+        backgroundColor: state.isSelected || state.isFocused ? '#B9EBFF' : 'white',
+        color: 'black',
+    }),
+    menuList: (baseStyles) => ({
+        ...baseStyles,
+        padding: '0px',
+        borderRadius: '5px'
+    })
+};
+
 function InfoCard() {
 
     const [file, setFile] = useState<File | undefined>();
@@ -105,12 +119,7 @@ function InfoCard() {
                     getOptionLabel={(option) => (option as Database).title}
                     getOptionValue={(option) => (option as Database).id}
                     onChange={(value) => setDatabaseID((value as Database).id)}
-                    styles={{
-                        option: (baseStyles, state) => ({
-                            ...baseStyles,
-                            backgroundColor: state.isFocused ? '#B9EBFF' : 'white',
-                        }),
-                    }}
+                    styles={styles}
                     placeholder='🔎 database...'
                 />
                 <StyledFileUpload>
