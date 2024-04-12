@@ -1,16 +1,25 @@
+import { parse } from 'csv-parse/sync';
+import fs from 'fs';
+import { TransactionItem } from './interfaces';
 import { Category } from './enums';
-import { parseCSV } from './utils/csv-file';
 
-/**
- * Properties to be specified in instances of {@link TransactionItem}
- */
-export interface TransactionItem {
-    transactionDate: string;
-    postDate: string;
-    description: string;
-    amount: number;
-    category: Category;
-    memo: string;
+function parseCSV(filePath: string) {
+    const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8' });
+    return parse(
+        fileContent,
+        {
+            delimiter: ',',
+            columns: true,
+            skip_empty_lines: true,
+        }
+    );
+}
+
+export function deleteCSV(file: string) {
+    fs.unlink(file, (err) => {
+        if (err) throw err;
+        console.debug(`${file} was successfully deleted...`);
+    })
 }
 
 export function createTransactions(tempFilePath: string) {
@@ -36,5 +45,6 @@ function createTransaction(parsedData: any): TransactionItem[] {
 }
 
 module.exports = {
+    deleteCSV,
     createTransactions,
 }
