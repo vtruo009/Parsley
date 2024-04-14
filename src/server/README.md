@@ -28,13 +28,13 @@ Steps to set up environment variables and integrate with Notion.
 
     b. Category - select property with labels `Food & Drinks`, `Shopping`, `Bills & Utilities`, and `Groceries`
 
-    c. Amount - number property; select the appropriate currency
+    c. Amount - number property (select the appropriate currency)
 
     d. Date - date property
 
     e. Memo - text property
 
-2. On the page where the databse lives, click the 3-dot menu on the upper right corner
+2. On the page where the database lives, click the 3-dot menu on the upper right corner
 
 3. Scroll down to "Connections", search for and select the newly created integration
 
@@ -42,22 +42,14 @@ Steps to set up environment variables and integrate with Notion.
 
     <img src='../../screenshots/integrated-connection.png' alt='integrated-connection' style='width: 60%' />
 
-5. Click on 3-dot menu of the database and click "Copy link to view"
-
-6. Paste it on the page or any text editor and copy the string between "/" and "?" to obtain the database ID
-
 ### Environment Variables :palm_tree:
 
 1. Create a `.env` file at root directory of the cloned project
 
-2. Create an env variable and paste the database ID. For example:
+2. Go back to newly created integration page, click show and copy Notion Secret
 
-    ```NOTION_DATABASE_ID=1234567890abcdefg```
+3. Create an env variable and paste the secret key. For example:
 
-3. Go back to newly created integration page, click show and copy Notion Secret
-
-4. Create an env variable and paste the secret key. For example:
-
-    ```NOTION_SECRET=<secret_super secretive notion secret>```
+    ```NOTION_SECRET=<secret_super-secretive-notion-secret>```
 
 > **_NOTE:_** an optional variable `PORT` can be set in the `.env` file. If not set, then default will be port 3000.

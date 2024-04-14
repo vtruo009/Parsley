@@ -1,6 +1,6 @@
 # Parsley :herb:
 
-Parses CSV files and help streamline monthly budgeting by automating the creation of credit card transactions.
+Parses bank statement CSV file to easily input transactions into Notion database.
 
 ## Description :memo:
 
@@ -28,6 +28,17 @@ If haven't done so, please make sure backend is set up following this [guide](sr
 The application can be used as a widget in Notion or by going to the localhost address. To embed it, simply copy the localhost url, create an embded block in Notion, and paste the url.
 
  > **_NOTE:_** When the application is stopped in the terminal, the widget will appear blank. Refresh Notion when spinning up the application again.
+
+ ## Roadmap
+
+ This project is a work in progress and only works locally ad of now.
+
+- [x] Parse and create transactions in integrated database
+- [x] Database selection
+- [ ] Reactive widget; ability to resize
+- [ ] Flexibility to customize category label(s)
+- [ ] Clean up transaction description/title
+- [ ] Dark mode
 
 ## Tools :toolbox:
 
