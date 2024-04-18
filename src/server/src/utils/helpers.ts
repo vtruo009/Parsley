@@ -3,6 +3,8 @@ import fs from 'fs';
 import { TransactionItem } from './interfaces';
 import { Category } from './enums';
 
+const RX: RegExp = /\+?\*([A-Z]|[0-9])*/gi;
+
 function parseCSV(filePath: string) {
     const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8' });
     return parse(
@@ -34,7 +36,7 @@ function createTransaction(parsedData: any): TransactionItem[] {
             transactions.push({
                 transactionDate: new Date(record['Transaction Date']).toISOString(),
                 postDate: new Date(record['Post Date']).toISOString(),
-                description: record.Description as string,
+                description: record.Description.replace(RX, '') as string,
                 category: record.Category as Category,
                 amount: Math.abs(record.Amount as number),
                 memo: record.Memo as string,
