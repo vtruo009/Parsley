@@ -6,7 +6,7 @@ Parses bank statement CSV file to easily input transactions into Notion database
 
 Notion has gained popularity as a versatile tool for organizing various aspects of everyday life. One common use is for tracking personal finances. However, manually creating an entry in Notion's table database for every transaction can be incredibly tedious. This project aims to simplify and automate the process of creating these entries.
 
-See it in action in this [demo video](https://youtu.be/YW1HkkukXc0)!
+See it in action in this [demo video](https://youtu.be/WJeamVuVsmQ)!
 
 ## Getting Started :hammer:
 
